@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/mini_sgbd.dir/main.cpp.o CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.o -o mini_sgbd 
