@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gian/Downloads/BDII/BDII-main/mini_sgbd
+CMAKE_SOURCE_DIR = /home/gian/BDII/BDII/mini_sgbd
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build
+CMAKE_BINARY_DIR = /home/gian/BDII/BDII/mini_sgbd/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -65,6 +65,7 @@ CMAKE_BINARY_DIR = /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build
 # The main recursive "all" target.
 all: CMakeFiles/mini_sgbd.dir/all
 all: CMakeFiles/test_storage.dir/all
+all: CMakeFiles/test_buffer.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -74,6 +75,7 @@ preinstall:
 # The main recursive "clean" target.
 clean: CMakeFiles/mini_sgbd.dir/clean
 clean: CMakeFiles/test_storage.dir/clean
+clean: CMakeFiles/test_buffer.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -83,14 +85,14 @@ clean: CMakeFiles/test_storage.dir/clean
 CMakeFiles/mini_sgbd.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_sgbd.dir/build.make CMakeFiles/mini_sgbd.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_sgbd.dir/build.make CMakeFiles/mini_sgbd.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gian/Downloads/BDII/BDII-main/mini_sgbd/build/CMakeFiles --progress-num=1,2,3 "Built target mini_sgbd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles --progress-num=1,2,3 "Built target mini_sgbd"
 .PHONY : CMakeFiles/mini_sgbd.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/mini_sgbd.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/mini_sgbd.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles 0
 .PHONY : CMakeFiles/mini_sgbd.dir/rule
 
 # Convenience name for target.
@@ -109,14 +111,14 @@ CMakeFiles/mini_sgbd.dir/clean:
 CMakeFiles/test_storage.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_storage.dir/build.make CMakeFiles/test_storage.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_storage.dir/build.make CMakeFiles/test_storage.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gian/Downloads/BDII/BDII-main/mini_sgbd/build/CMakeFiles --progress-num=4,5,6 "Built target test_storage"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles --progress-num=8,9,10 "Built target test_storage"
 .PHONY : CMakeFiles/test_storage.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/test_storage.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_storage.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles 0
 .PHONY : CMakeFiles/test_storage.dir/rule
 
 # Convenience name for target.
@@ -127,6 +129,32 @@ test_storage: CMakeFiles/test_storage.dir/rule
 CMakeFiles/test_storage.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_storage.dir/build.make CMakeFiles/test_storage.dir/clean
 .PHONY : CMakeFiles/test_storage.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_buffer.dir
+
+# All Build rule for target.
+CMakeFiles/test_buffer.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_buffer.dir/build.make CMakeFiles/test_buffer.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_buffer.dir/build.make CMakeFiles/test_buffer.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles --progress-num=4,5,6,7 "Built target test_buffer"
+.PHONY : CMakeFiles/test_buffer.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_buffer.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_buffer.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_buffer.dir/rule
+
+# Convenience name for target.
+test_buffer: CMakeFiles/test_buffer.dir/rule
+.PHONY : test_buffer
+
+# clean rule for target.
+CMakeFiles/test_buffer.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_buffer.dir/build.make CMakeFiles/test_buffer.dir/clean
+.PHONY : CMakeFiles/test_buffer.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

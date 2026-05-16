@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gian/Downloads/BDII/BDII-main/mini_sgbd
+CMAKE_SOURCE_DIR = /home/gian/BDII/BDII/mini_sgbd
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build
+CMAKE_BINARY_DIR = /home/gian/BDII/BDII/mini_sgbd/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/mini_sgbd.dir/depend.make
@@ -70,32 +70,32 @@ include CMakeFiles/mini_sgbd.dir/progress.make
 include CMakeFiles/mini_sgbd.dir/flags.make
 
 CMakeFiles/mini_sgbd.dir/main.cpp.o: CMakeFiles/mini_sgbd.dir/flags.make
-CMakeFiles/mini_sgbd.dir/main.cpp.o: /home/gian/Downloads/BDII/BDII-main/mini_sgbd/main.cpp
+CMakeFiles/mini_sgbd.dir/main.cpp.o: /home/gian/BDII/BDII/mini_sgbd/main.cpp
 CMakeFiles/mini_sgbd.dir/main.cpp.o: CMakeFiles/mini_sgbd.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gian/Downloads/BDII/BDII-main/mini_sgbd/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/mini_sgbd.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mini_sgbd.dir/main.cpp.o -MF CMakeFiles/mini_sgbd.dir/main.cpp.o.d -o CMakeFiles/mini_sgbd.dir/main.cpp.o -c /home/gian/Downloads/BDII/BDII-main/mini_sgbd/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/mini_sgbd.dir/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mini_sgbd.dir/main.cpp.o -MF CMakeFiles/mini_sgbd.dir/main.cpp.o.d -o CMakeFiles/mini_sgbd.dir/main.cpp.o -c /home/gian/BDII/BDII/mini_sgbd/main.cpp
 
 CMakeFiles/mini_sgbd.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/mini_sgbd.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gian/Downloads/BDII/BDII-main/mini_sgbd/main.cpp > CMakeFiles/mini_sgbd.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gian/BDII/BDII/mini_sgbd/main.cpp > CMakeFiles/mini_sgbd.dir/main.cpp.i
 
 CMakeFiles/mini_sgbd.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/mini_sgbd.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gian/Downloads/BDII/BDII-main/mini_sgbd/main.cpp -o CMakeFiles/mini_sgbd.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gian/BDII/BDII/mini_sgbd/main.cpp -o CMakeFiles/mini_sgbd.dir/main.cpp.s
 
 CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.o: CMakeFiles/mini_sgbd.dir/flags.make
-CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.o: /home/gian/Downloads/BDII/BDII-main/mini_sgbd/src/storage/disk_manager.cpp
+CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.o: /home/gian/BDII/BDII/mini_sgbd/src/storage/disk_manager.cpp
 CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.o: CMakeFiles/mini_sgbd.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gian/Downloads/BDII/BDII-main/mini_sgbd/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.o -MF CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.o.d -o CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.o -c /home/gian/Downloads/BDII/BDII-main/mini_sgbd/src/storage/disk_manager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.o -MF CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.o.d -o CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.o -c /home/gian/BDII/BDII/mini_sgbd/src/storage/disk_manager.cpp
 
 CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gian/Downloads/BDII/BDII-main/mini_sgbd/src/storage/disk_manager.cpp > CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gian/BDII/BDII/mini_sgbd/src/storage/disk_manager.cpp > CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.i
 
 CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gian/Downloads/BDII/BDII-main/mini_sgbd/src/storage/disk_manager.cpp -o CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gian/BDII/BDII/mini_sgbd/src/storage/disk_manager.cpp -o CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.s
 
 # Object files for target mini_sgbd
 mini_sgbd_OBJECTS = \
@@ -109,7 +109,7 @@ mini_sgbd: CMakeFiles/mini_sgbd.dir/main.cpp.o
 mini_sgbd: CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.o
 mini_sgbd: CMakeFiles/mini_sgbd.dir/build.make
 mini_sgbd: CMakeFiles/mini_sgbd.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/gian/Downloads/BDII/BDII-main/mini_sgbd/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable mini_sgbd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable mini_sgbd"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mini_sgbd.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -121,6 +121,6 @@ CMakeFiles/mini_sgbd.dir/clean:
 .PHONY : CMakeFiles/mini_sgbd.dir/clean
 
 CMakeFiles/mini_sgbd.dir/depend:
-	cd /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gian/Downloads/BDII/BDII-main/mini_sgbd /home/gian/Downloads/BDII/BDII-main/mini_sgbd /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build/CMakeFiles/mini_sgbd.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/gian/BDII/BDII/mini_sgbd/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gian/BDII/BDII/mini_sgbd /home/gian/BDII/BDII/mini_sgbd /home/gian/BDII/BDII/mini_sgbd/build /home/gian/BDII/BDII/mini_sgbd/build /home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles/mini_sgbd.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/mini_sgbd.dir/depend
 

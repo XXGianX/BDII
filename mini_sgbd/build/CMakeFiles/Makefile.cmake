@@ -7,7 +7,7 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/home/gian/Downloads/BDII/BDII-main/mini_sgbd/CMakeLists.txt"
+  "/home/gian/BDII/BDII/mini_sgbd/CMakeLists.txt"
   "CMakeFiles/3.28.3/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.28.3/CMakeSystem.cmake"
   "/usr/share/cmake-3.28/Modules/CMakeCXXCompiler.cmake.in"
@@ -104,4 +104,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/mini_sgbd.dir/DependInfo.cmake"
   "CMakeFiles/test_storage.dir/DependInfo.cmake"
+  "CMakeFiles/test_buffer.dir/DependInfo.cmake"
   )

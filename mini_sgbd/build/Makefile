@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gian/Downloads/BDII/BDII-main/mini_sgbd
+CMAKE_SOURCE_DIR = /home/gian/BDII/BDII/mini_sgbd
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build
+CMAKE_BINARY_DIR = /home/gian/BDII/BDII/mini_sgbd/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build/CMakeFiles /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles /home/gian/BDII/BDII/mini_sgbd/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -142,6 +142,19 @@ test_storage/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_storage.dir/build.make CMakeFiles/test_storage.dir/build
 .PHONY : test_storage/fast
 
+#=============================================================================
+# Target rules for targets named test_buffer
+
+# Build rule for target.
+test_buffer: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_buffer
+.PHONY : test_buffer
+
+# fast build rule for target.
+test_buffer/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_buffer.dir/build.make CMakeFiles/test_buffer.dir/build
+.PHONY : test_buffer/fast
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -166,6 +179,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_sgbd.dir/build.make CMakeFiles/mini_sgbd.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/buffer/buffer_manager.o: src/buffer/buffer_manager.cpp.o
+.PHONY : src/buffer/buffer_manager.o
+
+# target to build an object file
+src/buffer/buffer_manager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_buffer.dir/build.make CMakeFiles/test_buffer.dir/src/buffer/buffer_manager.cpp.o
+.PHONY : src/buffer/buffer_manager.cpp.o
+
+src/buffer/buffer_manager.i: src/buffer/buffer_manager.cpp.i
+.PHONY : src/buffer/buffer_manager.i
+
+# target to preprocess a source file
+src/buffer/buffer_manager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_buffer.dir/build.make CMakeFiles/test_buffer.dir/src/buffer/buffer_manager.cpp.i
+.PHONY : src/buffer/buffer_manager.cpp.i
+
+src/buffer/buffer_manager.s: src/buffer/buffer_manager.cpp.s
+.PHONY : src/buffer/buffer_manager.s
+
+# target to generate assembly for a file
+src/buffer/buffer_manager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_buffer.dir/build.make CMakeFiles/test_buffer.dir/src/buffer/buffer_manager.cpp.s
+.PHONY : src/buffer/buffer_manager.cpp.s
+
 src/storage/disk_manager.o: src/storage/disk_manager.cpp.o
 .PHONY : src/storage/disk_manager.o
 
@@ -173,6 +210,7 @@ src/storage/disk_manager.o: src/storage/disk_manager.cpp.o
 src/storage/disk_manager.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_sgbd.dir/build.make CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_storage.dir/build.make CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_buffer.dir/build.make CMakeFiles/test_buffer.dir/src/storage/disk_manager.cpp.o
 .PHONY : src/storage/disk_manager.cpp.o
 
 src/storage/disk_manager.i: src/storage/disk_manager.cpp.i
@@ -182,6 +220,7 @@ src/storage/disk_manager.i: src/storage/disk_manager.cpp.i
 src/storage/disk_manager.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_sgbd.dir/build.make CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_storage.dir/build.make CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_buffer.dir/build.make CMakeFiles/test_buffer.dir/src/storage/disk_manager.cpp.i
 .PHONY : src/storage/disk_manager.cpp.i
 
 src/storage/disk_manager.s: src/storage/disk_manager.cpp.s
@@ -191,7 +230,32 @@ src/storage/disk_manager.s: src/storage/disk_manager.cpp.s
 src/storage/disk_manager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mini_sgbd.dir/build.make CMakeFiles/mini_sgbd.dir/src/storage/disk_manager.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_storage.dir/build.make CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_buffer.dir/build.make CMakeFiles/test_buffer.dir/src/storage/disk_manager.cpp.s
 .PHONY : src/storage/disk_manager.cpp.s
+
+tests/test_buffer.o: tests/test_buffer.cpp.o
+.PHONY : tests/test_buffer.o
+
+# target to build an object file
+tests/test_buffer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_buffer.dir/build.make CMakeFiles/test_buffer.dir/tests/test_buffer.cpp.o
+.PHONY : tests/test_buffer.cpp.o
+
+tests/test_buffer.i: tests/test_buffer.cpp.i
+.PHONY : tests/test_buffer.i
+
+# target to preprocess a source file
+tests/test_buffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_buffer.dir/build.make CMakeFiles/test_buffer.dir/tests/test_buffer.cpp.i
+.PHONY : tests/test_buffer.cpp.i
+
+tests/test_buffer.s: tests/test_buffer.cpp.s
+.PHONY : tests/test_buffer.s
+
+# target to generate assembly for a file
+tests/test_buffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_buffer.dir/build.make CMakeFiles/test_buffer.dir/tests/test_buffer.cpp.s
+.PHONY : tests/test_buffer.cpp.s
 
 tests/test_storage.o: tests/test_storage.cpp.o
 .PHONY : tests/test_storage.o
@@ -226,13 +290,20 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... mini_sgbd"
+	@echo "... test_buffer"
 	@echo "... test_storage"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/buffer/buffer_manager.o"
+	@echo "... src/buffer/buffer_manager.i"
+	@echo "... src/buffer/buffer_manager.s"
 	@echo "... src/storage/disk_manager.o"
 	@echo "... src/storage/disk_manager.i"
 	@echo "... src/storage/disk_manager.s"
+	@echo "... tests/test_buffer.o"
+	@echo "... tests/test_buffer.i"
+	@echo "... tests/test_buffer.s"
 	@echo "... tests/test_storage.o"
 	@echo "... tests/test_storage.i"
 	@echo "... tests/test_storage.s"

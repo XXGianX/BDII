@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gian/Downloads/BDII/BDII-main/mini_sgbd
+CMAKE_SOURCE_DIR = /home/gian/BDII/BDII/mini_sgbd
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build
+CMAKE_BINARY_DIR = /home/gian/BDII/BDII/mini_sgbd/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/test_storage.dir/depend.make
@@ -70,32 +70,32 @@ include CMakeFiles/test_storage.dir/progress.make
 include CMakeFiles/test_storage.dir/flags.make
 
 CMakeFiles/test_storage.dir/tests/test_storage.cpp.o: CMakeFiles/test_storage.dir/flags.make
-CMakeFiles/test_storage.dir/tests/test_storage.cpp.o: /home/gian/Downloads/BDII/BDII-main/mini_sgbd/tests/test_storage.cpp
+CMakeFiles/test_storage.dir/tests/test_storage.cpp.o: /home/gian/BDII/BDII/mini_sgbd/tests/test_storage.cpp
 CMakeFiles/test_storage.dir/tests/test_storage.cpp.o: CMakeFiles/test_storage.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gian/Downloads/BDII/BDII-main/mini_sgbd/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test_storage.dir/tests/test_storage.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_storage.dir/tests/test_storage.cpp.o -MF CMakeFiles/test_storage.dir/tests/test_storage.cpp.o.d -o CMakeFiles/test_storage.dir/tests/test_storage.cpp.o -c /home/gian/Downloads/BDII/BDII-main/mini_sgbd/tests/test_storage.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test_storage.dir/tests/test_storage.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_storage.dir/tests/test_storage.cpp.o -MF CMakeFiles/test_storage.dir/tests/test_storage.cpp.o.d -o CMakeFiles/test_storage.dir/tests/test_storage.cpp.o -c /home/gian/BDII/BDII/mini_sgbd/tests/test_storage.cpp
 
 CMakeFiles/test_storage.dir/tests/test_storage.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_storage.dir/tests/test_storage.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gian/Downloads/BDII/BDII-main/mini_sgbd/tests/test_storage.cpp > CMakeFiles/test_storage.dir/tests/test_storage.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gian/BDII/BDII/mini_sgbd/tests/test_storage.cpp > CMakeFiles/test_storage.dir/tests/test_storage.cpp.i
 
 CMakeFiles/test_storage.dir/tests/test_storage.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_storage.dir/tests/test_storage.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gian/Downloads/BDII/BDII-main/mini_sgbd/tests/test_storage.cpp -o CMakeFiles/test_storage.dir/tests/test_storage.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gian/BDII/BDII/mini_sgbd/tests/test_storage.cpp -o CMakeFiles/test_storage.dir/tests/test_storage.cpp.s
 
 CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.o: CMakeFiles/test_storage.dir/flags.make
-CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.o: /home/gian/Downloads/BDII/BDII-main/mini_sgbd/src/storage/disk_manager.cpp
+CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.o: /home/gian/BDII/BDII/mini_sgbd/src/storage/disk_manager.cpp
 CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.o: CMakeFiles/test_storage.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gian/Downloads/BDII/BDII-main/mini_sgbd/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.o -MF CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.o.d -o CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.o -c /home/gian/Downloads/BDII/BDII-main/mini_sgbd/src/storage/disk_manager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.o -MF CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.o.d -o CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.o -c /home/gian/BDII/BDII/mini_sgbd/src/storage/disk_manager.cpp
 
 CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gian/Downloads/BDII/BDII-main/mini_sgbd/src/storage/disk_manager.cpp > CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gian/BDII/BDII/mini_sgbd/src/storage/disk_manager.cpp > CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.i
 
 CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gian/Downloads/BDII/BDII-main/mini_sgbd/src/storage/disk_manager.cpp -o CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gian/BDII/BDII/mini_sgbd/src/storage/disk_manager.cpp -o CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.s
 
 # Object files for target test_storage
 test_storage_OBJECTS = \
@@ -109,7 +109,7 @@ test_storage: CMakeFiles/test_storage.dir/tests/test_storage.cpp.o
 test_storage: CMakeFiles/test_storage.dir/src/storage/disk_manager.cpp.o
 test_storage: CMakeFiles/test_storage.dir/build.make
 test_storage: CMakeFiles/test_storage.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/gian/Downloads/BDII/BDII-main/mini_sgbd/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable test_storage"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable test_storage"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_storage.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -121,6 +121,6 @@ CMakeFiles/test_storage.dir/clean:
 .PHONY : CMakeFiles/test_storage.dir/clean
 
 CMakeFiles/test_storage.dir/depend:
-	cd /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gian/Downloads/BDII/BDII-main/mini_sgbd /home/gian/Downloads/BDII/BDII-main/mini_sgbd /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build /home/gian/Downloads/BDII/BDII-main/mini_sgbd/build/CMakeFiles/test_storage.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/gian/BDII/BDII/mini_sgbd/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gian/BDII/BDII/mini_sgbd /home/gian/BDII/BDII/mini_sgbd /home/gian/BDII/BDII/mini_sgbd/build /home/gian/BDII/BDII/mini_sgbd/build /home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles/test_storage.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/test_storage.dir/depend
 
