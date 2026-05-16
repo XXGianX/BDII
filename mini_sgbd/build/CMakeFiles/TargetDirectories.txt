@@ -1,5 +1,0 @@
-/home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles/mini_sgbd.dir
-/home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles/test_storage.dir
-/home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles/test_buffer.dir
-/home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles/edit_cache.dir
-/home/gian/BDII/BDII/mini_sgbd/build/CMakeFiles/rebuild_cache.dir
