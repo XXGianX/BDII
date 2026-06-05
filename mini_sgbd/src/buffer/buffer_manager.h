@@ -5,12 +5,12 @@
 #include "../storage/page.h"
 #include <unordered_map>
 #include <vector>
+#include <list>
 
-// Metadatos de cada frame en el Buffer Pool
 struct FrameDescriptor {
-    PageId page_id   = INVALID_PAGE; // qué página ocupa este frame
-    bool   is_dirty  = false;        // fue modificada?
-    int    pin_count = 0;            // cuántos módulos la están usando
+    PageId page_id   = INVALID_PAGE;
+    bool   is_dirty  = false;
+    int    pin_count = 0;
 };
 
 class BufferManager {
@@ -18,34 +18,38 @@ public:
     BufferManager(DiskManager& disk_manager, size_t num_frames);
     ~BufferManager();
 
-    // Trae una página al buffer y la retorna
     Page* fetch_page(PageId page_id);
-
-    // Libera el uso de una página
-    void unpin_page(PageId page_id, bool is_dirty);
-
-    // Crea una página nueva en disco y la trae al buffer
+    void  unpin_page(PageId page_id, bool is_dirty);
     Page* new_page(PageId& out_page_id);
+    void  flush_all();
+    void  print_status() const;
 
-    // Escribe todas las páginas dirty al disco
-    void flush_all();
-
-    // Muestra el estado actual del buffer (para debug)
-    void print_status() const;
+    // Estadísticas para el informe
+    double hit_rate() const;
+    size_t get_total_requests() const { return total_requests_; }
+    size_t get_cache_hits()     const { return cache_hits_; }
 
 private:
     DiskManager&                        disk_;
     size_t                              num_frames_;
-
-    // El Buffer Pool: arreglo de frames en RAM
     std::vector<Page>                   frames_;
-
-    // Descriptor de cada frame
     std::vector<FrameDescriptor>        descriptors_;
-
-    // Page Table: página → frame
     std::unordered_map<PageId, FrameId> page_table_;
 
-    // Busca un frame libre 
-    FrameId find_free_frame();
+    // ── LRU ──────────────────────────────────────────────────────
+    // frente = más recientemente usado, final = víctima
+    std::list<FrameId>                              lru_list_;
+    std::unordered_map<FrameId,
+        std::list<FrameId>::iterator>               lru_map_;
+
+    // Estadísticas
+    size_t total_requests_ = 0;
+    size_t cache_hits_     = 0;
+
+    // Encuentra el frame víctima según LRU
+    // Devuelve INVALID_PAGE si todos están pinned
+    FrameId find_victim();
+
+    void lru_remove(FrameId fid);
+    void lru_add_front(FrameId fid);
 };

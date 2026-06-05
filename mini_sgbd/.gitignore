@@ -1,5 +1,9 @@
+cd ~/BDII/BDII/mini_sgbd
+cat > .gitignore << 'EOF'
 build/
 data/
 *.o
 *.d
 *.db
+.vscode/
+EOF

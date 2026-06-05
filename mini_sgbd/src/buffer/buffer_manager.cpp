@@ -7,7 +7,11 @@ BufferManager::BufferManager(DiskManager& disk, size_t num_frames)
     : disk_(disk), num_frames_(num_frames),
       frames_(num_frames), descriptors_(num_frames)
 {
-    // Todos los frames inician vacíos — page_id = INVALID_PAGE
+    // Todos los frames inician libres → entran a la lista LRU
+    for (FrameId i = 0; i < num_frames_; i++) {
+        lru_list_.push_back(i);
+        lru_map_[i] = std::prev(lru_list_.end());
+    }
 }
 
 BufferManager::~BufferManager() {
@@ -15,65 +19,100 @@ BufferManager::~BufferManager() {
 }
 
 Page* BufferManager::fetch_page(PageId page_id) {
+    total_requests_++;
 
-    // ── Caso 1: la página YA está en el buffer (HIT) ────────────
+    // ── HIT: página ya está en el buffer ────────────────────────
     auto it = page_table_.find(page_id);
     if (it != page_table_.end()) {
+        cache_hits_++;
         FrameId fid = it->second;
         descriptors_[fid].pin_count++;
+
+        // Mover al frente de LRU (más recientemente usado)
+        lru_remove(fid);
+        lru_add_front(fid);
         return &frames_[fid];
     }
 
-    // ── Caso 2: la página NO está en el buffer (MISS) ───────────
-    FrameId fid = find_free_frame();
+    // ── MISS: traer del disco ────────────────────────────────────
+    FrameId fid = find_victim();
     if (fid == static_cast<FrameId>(INVALID_PAGE)) {
-        throw std::runtime_error("Buffer lleno: no hay frames disponibles");
+        throw std::runtime_error("Buffer lleno: todos los frames están pinned");
     }
 
-    // Leer la página del disco al frame
+    FrameDescriptor& desc = descriptors_[fid];
+
+    // Si el frame víctima tiene página dirty → escribir al disco
+    if (desc.is_dirty && desc.page_id != INVALID_PAGE) {
+        disk_.write_page(desc.page_id, frames_[fid].data_);
+        desc.is_dirty = false;
+    }
+
+    // Eliminar entrada vieja de la Page Table
+    if (desc.page_id != INVALID_PAGE) {
+        page_table_.erase(desc.page_id);
+    }
+
+    // Leer la nueva página del disco
     disk_.read_page(page_id, frames_[fid].data_);
 
-    // Actualizar descriptor y Page Table
-    descriptors_[fid].page_id   = page_id;
-    descriptors_[fid].is_dirty  = false;
-    descriptors_[fid].pin_count = 1;
-    page_table_[page_id]        = fid;
+    desc.page_id   = page_id;
+    desc.is_dirty  = false;
+    desc.pin_count = 1;
+    page_table_[page_id] = fid;
+
+    // Frame pinned → fuera de la lista LRU
+    lru_remove(fid);
 
     return &frames_[fid];
 }
 
 void BufferManager::unpin_page(PageId page_id, bool is_dirty) {
     auto it = page_table_.find(page_id);
-    if (it == page_table_.end()) return; // no estaba en el buffer
+    if (it == page_table_.end()) return;
 
     FrameId fid = it->second;
+    FrameDescriptor& desc = descriptors_[fid];
 
-    if (descriptors_[fid].pin_count <= 0) return;
+    if (desc.pin_count <= 0) return;
+    if (is_dirty) desc.is_dirty = true;
 
-    if (is_dirty) descriptors_[fid].is_dirty = true;
+    desc.pin_count--;
 
-    descriptors_[fid].pin_count--;
+    // Si nadie la usa → vuelve a la lista LRU al frente
+    if (desc.pin_count == 0) {
+        lru_add_front(fid);
+    }
 }
 
 Page* BufferManager::new_page(PageId& out_page_id) {
     out_page_id = disk_.get_num_pages();
 
-    FrameId fid = find_free_frame();
+    FrameId fid = find_victim();
     if (fid == static_cast<FrameId>(INVALID_PAGE)) {
         throw std::runtime_error("Buffer lleno: no se puede crear página nueva");
     }
 
-    // Inicializar la página nueva
+    FrameDescriptor& desc = descriptors_[fid];
+
+    if (desc.is_dirty && desc.page_id != INVALID_PAGE) {
+        disk_.write_page(desc.page_id, frames_[fid].data_);
+        desc.is_dirty = false;
+    }
+    if (desc.page_id != INVALID_PAGE) {
+        page_table_.erase(desc.page_id);
+    }
+
     frames_[fid] = Page();
     frames_[fid].header()->page_id = out_page_id;
-
-    // Escribirla en disco para reservar su posición
     disk_.write_page(out_page_id, frames_[fid].data_);
 
-    descriptors_[fid].page_id   = out_page_id;
-    descriptors_[fid].is_dirty  = false;
-    descriptors_[fid].pin_count = 1;
-    page_table_[out_page_id]    = fid;
+    desc.page_id   = out_page_id;
+    desc.is_dirty  = false;
+    desc.pin_count = 1;
+    page_table_[out_page_id] = fid;
+
+    lru_remove(fid);
 
     return &frames_[fid];
 }
@@ -88,18 +127,24 @@ void BufferManager::flush_all() {
     }
 }
 
+double BufferManager::hit_rate() const {
+    if (total_requests_ == 0) return 0.0;
+    return (double)cache_hits_ / total_requests_ * 100.0;
+}
+
 void BufferManager::print_status() const {
-    std::cout << "\n--- Estado del Buffer Pool (" << num_frames_ << " frames) ---\n";
+    std::cout << "\n--- Buffer Pool (" << num_frames_ << " frames) ---\n";
     std::cout << std::left
               << std::setw(8)  << "Frame"
               << std::setw(10) << "PageId"
               << std::setw(10) << "PinCount"
               << std::setw(8)  << "Dirty"
-              << "\n";
-    std::cout << std::string(36, '-') << "\n";
+              << "\n" << std::string(36, '-') << "\n";
+
     for (FrameId fid = 0; fid < num_frames_; fid++) {
         const FrameDescriptor& d = descriptors_[fid];
-        std::string pid = (d.page_id == INVALID_PAGE) ? "libre" : std::to_string(d.page_id);
+        std::string pid = (d.page_id == INVALID_PAGE)
+                        ? "libre" : std::to_string(d.page_id);
         std::cout << std::left
                   << std::setw(8)  << fid
                   << std::setw(10) << pid
@@ -107,19 +152,42 @@ void BufferManager::print_status() const {
                   << std::setw(8)  << (d.is_dirty ? "si" : "no")
                   << "\n";
     }
+
+    // Mostrar orden LRU (frente = más reciente, final = víctima)
+    std::cout << "LRU orden: [";
+    for (FrameId fid : lru_list_) std::cout << fid << " ";
+    std::cout << "] (frente=reciente, final=victima)\n";
+
     std::cout << "Page Table: ";
-    for (auto& [pid, fid] : page_table_) {
-        std::cout << "P" << pid << "→F" << fid << " ";
-    }
-    std::cout << "\n-----------------------------------\n\n";
+    for (auto& [pid, fid] : page_table_)
+        std::cout << "P" << pid << "->F" << fid << " ";
+    std::cout << "\nHit rate: " << hit_rate() << "%\n";
+    std::cout << "-----------------------------------\n\n";
 }
 
-FrameId BufferManager::find_free_frame() {
-    // busca el primer frame vacío
-    for (FrameId fid = 0; fid < num_frames_; fid++) {
-        if (descriptors_[fid].page_id == INVALID_PAGE) {
+// ── LRU internals ────────────────────────────────────────────────
+
+FrameId BufferManager::find_victim() {
+    // Recorrer desde el final (menos usado) hasta el frente
+    for (auto rit = lru_list_.rbegin(); rit != lru_list_.rend(); ++rit) {
+        FrameId fid = *rit;
+        if (descriptors_[fid].pin_count == 0) {
+            lru_remove(fid);
             return fid;
         }
     }
     return static_cast<FrameId>(INVALID_PAGE);
+}
+
+void BufferManager::lru_remove(FrameId fid) {
+    auto it = lru_map_.find(fid);
+    if (it != lru_map_.end()) {
+        lru_list_.erase(it->second);
+        lru_map_.erase(it);
+    }
+}
+
+void BufferManager::lru_add_front(FrameId fid) {
+    lru_list_.push_front(fid);
+    lru_map_[fid] = lru_list_.begin();
 }
