@@ -1,2 +1,0 @@
-# BDII
-Proyecto de BDII
