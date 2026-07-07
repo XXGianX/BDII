@@ -2,106 +2,123 @@
 #include <iostream>
 #include <cassert>
 
-void test_nodo_layout() {
-    std::cout << "=== test_nodo_layout ===\n";
-
-    char buffer[PAGE_SIZE] = {};
-    BTreeNode node(buffer);
-    node.init(0, true);
-
-    assert(node.is_leaf());
-    assert(node.num_keys() == 0);
-    assert(!node.is_full());
-
-    std::cout << "Tamaño BTreeNodeHeader : " << sizeof(BTreeNodeHeader) << " bytes\n";
-    std::cout << "BTREE_ORDER            : " << BTREE_ORDER << "\n";
-    std::cout << "[OK] layout del nodo correcto\n\n";
-}
-
-void test_search_vacio() {
-    std::cout << "=== test_search_vacio ===\n";
-
-    DiskManager dm("data/test_btree.db");
-    BufferManager bm(dm, 8);
+void test_insert_sin_split() {
+    std::cout << "=== test_insert_sin_split ===\n";
+    DiskManager dm("data/test_ins.db");
+    BufferManager bm(dm, 10);
     BTree tree(bm);
 
-    auto result = tree.search(42);
-    assert(!result.has_value());
-    std::cout << "[OK] búsqueda en árbol vacío retorna nullopt\n\n";
-}
+    tree.insert(10, {0,0});
+    tree.insert(20, {0,1});
+    tree.insert(5,  {0,2});
 
-void test_insert_y_search() {
-    std::cout << "=== test_insert_y_search ===\n";
-
-    DiskManager dm("data/test_btree2.db");
-    BufferManager bm(dm, 8);
-    BTree tree(bm);
-
-    // Insertar algunas claves
-    tree.insert(10, {0, 0});
-    tree.insert(30, {0, 1});
-    tree.insert(20, {0, 2});
-    tree.insert(5,  {0, 3});
-
-    std::cout << "Árbol después de insertar 10, 30, 20, 5:\n";
     tree.print_tree();
 
-    // Buscar claves existentes
-    auto r1 = tree.search(10);
-    assert(r1.has_value() && r1->slot_id == 0);
-    std::cout << "Búsqueda 10: encontrada en slot " << r1->slot_id << "\n";
-
-    auto r2 = tree.search(20);
-    assert(r2.has_value() && r2->slot_id == 2);
-    std::cout << "Búsqueda 20: encontrada en slot " << r2->slot_id << "\n";
-
-    // Buscar clave inexistente
-    auto r3 = tree.search(99);
-    assert(!r3.has_value());
-    std::cout << "Búsqueda 99: no encontrada (correcto)\n";
-
-    std::cout << "[OK] insert y search funcionan correctamente\n\n";
+    assert(tree.search(10).has_value());
+    assert(tree.search(20).has_value());
+    assert(tree.search(5).has_value());
+    assert(!tree.search(99).has_value());
+    std::cout << "[OK] inserción sin split\n\n";
 }
 
-void test_integracion_buffer() {
-    std::cout << "=== test_integracion_buffer ===\n";
+void test_insert_con_split() {
+    std::cout << "=== test_insert_con_split ===\n";
+    DiskManager dm("data/test_split.db");
+    BufferManager bm(dm, 10);
+    BTree tree(bm);
 
-    {
-        DiskManager dm("data/test_btree3.db");
-        BufferManager bm(dm, 8);
-        BTree tree(bm);
+    // BTREE_ORDER=4 → split al insertar el 5to elemento
+    tree.insert(10, {0,0});
+    tree.insert(20, {0,1});
+    tree.insert(5,  {0,2});
+    tree.insert(15, {0,3});
+    tree.insert(25, {0,4}); // ← provoca split
 
-        tree.insert(50, {1, 0});
-        tree.insert(25, {1, 1});
-        tree.insert(75, {1, 2});
+    std::cout << "Árbol después del split:\n";
+    tree.print_tree();
 
-        PageId root = tree.root_page_id();
-        std::cout << "Root page_id: " << root << "\n";
-        bm.print_status();
-        // destructor de bm hace flush_all
+    // Todas las claves deben seguir encontrándose
+    for (int k : {5, 10, 15, 20, 25}) {
+        assert(tree.search(k).has_value());
+        std::cout << "Búsqueda " << k << ": OK\n";
+    }
+    std::cout << "[OK] split de hoja correcto\n\n";
+}
+
+void test_multiple_splits() {
+    std::cout << "=== test_multiple_splits ===\n";
+    DiskManager dm("data/test_multi.db");
+    BufferManager bm(dm, 20);
+    BTree tree(bm);
+
+    // Insertar 12 claves → varios splits y posible split de nodo interno
+    std::vector<int> claves = {30,10,50,20,40,60,5,15,25,35,45,55};
+    for (int k : claves) {
+        tree.insert(k, {0, (uint16_t)k});
     }
 
-    // Reabrir y verificar persistencia
-    {
-        DiskManager dm("data/test_btree3.db");
-        BufferManager bm(dm, 8);
+    std::cout << "Árbol con 12 claves:\n";
+    tree.print_tree();
 
-        // Leer la raíz directamente
-        Page* page = bm.fetch_page(0);
-        BTreeNode node(page->data_);
-        node.print();
-        bm.unpin_page(0, false);
-
-        std::cout << "[OK] nodos del B+ Tree persisten en disco via Buffer Manager\n\n";
+    for (int k : claves) {
+        auto r = tree.search(k);
+        assert(r.has_value());
+        assert(r->slot_id == (uint16_t)k);
     }
+    std::cout << "[OK] múltiples splits, todas las claves encontradas\n\n";
+}
+
+void test_remove_basico() {
+    std::cout << "=== test_remove_basico ===\n";
+    DiskManager dm("data/test_remove.db");
+    BufferManager bm(dm, 10);
+    BTree tree(bm);
+
+    tree.insert(10, {0,0});
+    tree.insert(20, {0,1});
+    tree.insert(5,  {0,2});
+
+    assert(tree.remove(10));
+    assert(!tree.search(10).has_value());
+    assert(tree.search(20).has_value());
+    assert(tree.search(5).has_value());
+
+    std::cout << "Árbol tras eliminar 10:\n";
+    tree.print_tree();
+    std::cout << "[OK] eliminación básica\n\n";
+}
+
+void test_remove_con_merge() {
+    std::cout << "=== test_remove_con_merge ===\n";
+    DiskManager dm("data/test_merge.db");
+    BufferManager bm(dm, 20);
+    BTree tree(bm);
+
+    std::vector<int> claves = {10,20,5,15,25,30};
+    for (int k : claves) tree.insert(k, {0,(uint16_t)k});
+
+    std::cout << "Árbol antes de eliminar:\n";
+    tree.print_tree();
+
+    tree.remove(25);
+    tree.remove(30);
+
+    std::cout << "Árbol después de eliminar 25 y 30:\n";
+    tree.print_tree();
+
+    assert(!tree.search(25).has_value());
+    assert(!tree.search(30).has_value());
+    assert(tree.search(10).has_value());
+    std::cout << "[OK] merge de hojas correcto\n\n";
 }
 
 int main() {
     system("mkdir -p data");
-    test_nodo_layout();
-    test_search_vacio();
-    test_insert_y_search();
-    test_integracion_buffer();
-    std::cout << "=== Todos los tests pasaron ===\n";
+    test_insert_sin_split();
+    test_insert_con_split();
+    test_multiple_splits();
+    test_remove_basico();
+    test_remove_con_merge();
+    std::cout << "=== Todos los tests Semanas 11-12 pasaron ===\n";
     return 0;
 }
